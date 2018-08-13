@@ -18,6 +18,22 @@ class TeamsController < ApplicationController
     end
   end
 
+  def edit
+
+  end
+
+  def update
+    if @team.update(team_params)
+      flash[:success] = "Team was successfully updated!"
+      redirect_to team_path(@team)
+    end
+  end
+
+  def show
+    @team = Team.find(params[:id])
+    @team_users = @team.users # .paginate(page: params[:page], per_page: 5)
+  end
+
   private
   def team_params
     params.require(:user).permit(:name)
