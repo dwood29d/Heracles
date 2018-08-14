@@ -5,6 +5,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   belongs_to :team
+  # belongs_to :department, through: :team
+  # has_many :user_exercises
+  # has_many :exercises, through: :user_exercises
 
 
   def full_name

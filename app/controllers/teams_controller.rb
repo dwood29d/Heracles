@@ -34,9 +34,18 @@ class TeamsController < ApplicationController
     @team_users = @team.users # .paginate(page: params[:page], per_page: 5)
   end
 
+  def search
+    if params[:search_param].blank?
+      flash.now[:danger] = "You have entered an empty search string"
+    else
+      @teams = Team.search(params[:search_param])
+      flash.now[:danger] = "No teams match this search criteria" if @teams.blank?
+    end
+  end
+
   private
   def team_params
-    params.require(:user).permit(:name)
+    params.require(:team).permit(:name)
   end
 
 end

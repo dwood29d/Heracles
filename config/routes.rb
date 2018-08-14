@@ -4,4 +4,5 @@ Rails.application.routes.draw do
 
   root 'welcome#index'
   resources :teams
+  get 'search_teams', to: 'teams#search'
 end

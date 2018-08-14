@@ -1,4 +1,53 @@
-<h1 align="center">Teams</h1>
-<% @teams.each do |team| %>
-  <%= link_to "#{team.name}", team_path(team) %>
+<h1 align="center">Find Teams</h1>
+
+<div id="team-lookup">
+  <%= form_tag search_teams_path, remote: true, method: :get, id: "team-lookup-form" do %>
+    <div class="form-group row no-padding text-center col-md-12">
+      <div class="col-md-10">
+        <%= text_field_tag :search_param, params[:search_param], placeholder: "Enter name of team", autofocus: true,
+                  class: "form-control search-box input-lg" %>
+      </div>
+      <div class="col-md-2">
+        <%= button_tag(type: :submit, class: "btn btn-lg btn-success") do %>
+          <i class="fa fa-search"></i> Search
+        <% end %>
+      </div>
+    </div>
+
+  <% end %>
+</div>
+
+<% if @teams.count > 0 %>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th colspan="2" class="page-header">
+          <h2>Teams</h2>
+        </th>
+      </tr>
+      <tr>
+        <th>Name</th>
+        <th>Team Since<th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @teams.each do |team| %>
+        <tr>
+          <td><%= team.name %></td>
+          <td><%= team.created_at %></td>
+          <td>
+            <% if current_user.team.id != team.id %>
+              <%= link_to "Join", team_path(team), class: "btn btn-primary btn-xs", data: {confirm: "Are you sure you want to join this team? Joining this team removes you from all other teams"} %>
+            <% else %>
+              <span class="label label-default">
+                You are already a member of this team.
+              </span>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <h3>No teams exist for these search results</h3>
 <% end %>
