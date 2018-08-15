@@ -11,7 +11,7 @@ class TeamsController < ApplicationController
   def create
     @team = Team.new(team_params)
     if @team.save
-      flash[:success] = "Congratulation! #{@team.name} has successfully been created!"
+      flash[:success] = "Congratulations! #{@team.name} has successfully been created!"
       redirect_to team_path(@team)
     else
       render 'new'
@@ -40,6 +40,9 @@ class TeamsController < ApplicationController
     else
       @teams = Team.search(params[:search_param])
       flash.now[:danger] = "No teams match this search criteria" if @teams.blank?
+    end
+    respond_to do |format|
+      format.js { render partial: 'teams/results' }
     end
   end
 
