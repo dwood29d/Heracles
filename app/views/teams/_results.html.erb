@@ -22,7 +22,7 @@
         <% @teams.each do |team| %>
           <tr>
             <td><%= team.name %></td>
-            <td><%= team.created_at.strftime("%B %d, %Y at %I:%M%p") %></td>
+            <td><%= team.created_at.localtime.strftime("%B %d, %Y at %I:%M%p") %></td>
             <td>
               <%= link_to "View", team_path(team), class: "btn btn-primary btn-xs" %>
               <% if current_user.team.id != team.id %>

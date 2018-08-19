@@ -27,7 +27,6 @@ class ExerisesController < ApplicationController
   end
 
   def show
-
   end
 
   def destroy

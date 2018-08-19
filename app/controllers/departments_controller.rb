@@ -10,7 +10,7 @@ class DepartmentsController < ApplicationController
 
   def show
     @department = Department.find(params[:id])
-    @department_challenges = Department.challenges
+    # @department_challenges = Department.challenges
   end
 
 
