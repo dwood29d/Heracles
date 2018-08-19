@@ -5,10 +5,10 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   belongs_to :team
-  # belongs_to :department, through: :team
-  # has_many :user_exercises
-  # has_many :exercises, through: :user_exercises
-
+  has_one :user_department
+  has_one :department, through: :user_department
+  has_many :user_exercises
+  has_many :exercises, through: :user_exercises
 
   def full_name
     return "#{first_name} #{last_name}".strip if (first_name || last_name)

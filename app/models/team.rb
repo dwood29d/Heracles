@@ -1,6 +1,10 @@
 class Team < ApplicationRecord
   has_many :users
-
+  has_many :departments
+  has_many :challenges, through: :department
+  validates :name, presence: true,
+            uniqueness: {case_sensitive: false },
+            length: { minimum: 3, maximum: 50 }
 
   def self.search(param)
     param.strip!

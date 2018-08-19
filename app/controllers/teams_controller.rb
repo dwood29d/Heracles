@@ -32,6 +32,7 @@ class TeamsController < ApplicationController
   def show
     @team = Team.find(params[:id])
     @team_users = @team.users # .paginate(page: params[:page], per_page: 5)
+    @team_departments = @team.departments
   end
 
   def search
